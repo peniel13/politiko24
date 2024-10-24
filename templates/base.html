@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>DevDrive - Tech</title>
+    <style>
+        .mynav ul a {
+            color: white !important;
+        }
+        .mynav ul li .dropdown-item:hover {
+            color: black !important;
+        }
+        .mynav ul {
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar mynav navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand me-8" href="{% url 'index' %}">PartiPolitik</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'apropos' %}">Apropos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'preinscription' %}">Adhesion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'paye_en_ligne' %}">Carte parti</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                    <li class="nav-item active dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" style="color: white" data-bs-toggle="dropdown" aria-expanded="false">
+                            Hi, {{ request.user.username }}
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'update_profile' %}">Update Profile</a></li>
+                            <li><a class="dropdown-item" href="{% url 'signout' %}">Logout</a></li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="nav-item me-3">
+                        <a href="{% url 'signup' %}">
+                            <button type="button" class="btn btn-outline-light">SignUp</button>
+                        </a>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a href="{% url 'signin' %}">
+                            <button type="button" class="btn btn-outline-light">Login</button>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Menu National -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" style="color: white" data-bs-toggle="dropdown" aria-expanded="false">
+                            National
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item" href="{% url 'blog' %}">Blog Info</a></li>
+                            <li><a class="dropdown-item" href="{% url 'forum' %}">Forum</a></li>
+                            <li><a class="dropdown-item" href="{% url 'user_list' %}">Partisants</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Menu Regions -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list_regions' %}" style="color: white;">Régions</a>
+                    </li>
+                    
+                    <!-- Menu Cellules -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list_cellules' %}" style="color: white;">Cellules</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% for message in messages %}
+    <div class="container">
+        <div class="alert alert-{{ message.tags }}" style="margin-top: 20px" role="alert">
+            {{ message }}
+        </div>
+    </div>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock content %}
+
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Home</a></li>
+                        <li><a href="#" class="text-white">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Connect with Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" target="_blank" class="text-white">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white">Learning Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" target="_blank" class="text-white">FreeCodeCamp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5 class="text-white">© DevDrive</h5>
+                    <p class="text-white">All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS-->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/gallery.js' %}"></script>
+</body>
+</html>

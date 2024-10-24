@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="owl-carousel owl-theme hero-slider"> 
+    <div class="slide slide1" style="background-image: url('{% static 'img/drapeau-rd-congo.jpg' %}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center text-white">
+                    <h6 class="text-white text-uppercase">Bienvenue sur la plateforme de votre parti politique UDPP</h6>
+                    <h1 class="display-3 my-4">Unissons Nos Forces<br />Pour La Justice Sociale</h1>
+                    <a href="" class="btn btn-brand">Inscrivez-vous</a>
+                    <a href="" class="btn btn-outline-light ms-3">Contactez-nous</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide slide2" style="background-image: url('{% static 'img/goma.jpg' %}');">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-10 offset-lg-1 text-white">
+                    <h6 class="text-white text-uppercase">Engagez-vous Pour Le Changement</h6>
+                    <h1 class="display-3 my-4">Pour Une Société Équitable<br />Et Inclusive</h1>
+                    <a href="" class="btn btn-brand">Rejoignez-Nous</a>
+                    <a href="" class="btn btn-outline-light ms-3">Contactez-nous</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="information">
+    <div class="container text-center">
+        <h2>Notre Engagement Politique</h2>
+        <p>Pour un avenir meilleur, ensemble.</p>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 py-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="info-box">
+                            <img src="{% static 'img/icon6.png' %}" alt="">
+                            <div class="ms-4">
+                                <h5>Notre Mission</h5>
+                                <p>Nous sommes un parti politique dédié à la défense des droits des citoyens et à la promotion d'une société juste et équitable. Notre mission est de rassembler les voix des citoyens pour créer un avenir meilleur.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="info-box">
+                            <img src="{% static 'img/icon4.png' %}" alt="">
+                            <div class="ms-4">
+                                <h5>Nos Valeurs</h5>
+                                <p>Nous croyons en la démocratie, la transparence et l'inclusion. Nos valeurs fondamentales sont l'intégrité, le respect des droits humains et la solidarité.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="info-box">
+                            <img src="{% static 'img/icon5.png' %}" alt="">
+                            <div class="ms-4">
+                                <h5>Nos Engagements</h5>
+                                <p>Nous nous engageons à travailler pour un développement durable, à promouvoir l'égalité des chances et à garantir que chaque voix compte dans notre société.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <img src="{% static 'img/constant.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section id="milestone">
+    <div class="container">
+        <div class="row text-center justify-content-center gy-4">
+            <div class="col-lg-2 col-sm-6">
+                <h1 class="display-4">5K+</h1>
+                <p class="mb-0">Membres Inscrits</p>
+            </div>
+            <div class="col-lg-2 col-sm-6">
+                <h1 class="display-4">1K+</h1>
+                <p class="mb-0">Propositions Législatives</p>
+            </div>
+            <div class="col-lg-2 col-sm-6">
+                <h1 class="display-4">300+</h1>
+                <p class="mb-0">Initiatives Communautaires</p>
+            </div>
+            <div class="col-lg-2 col-sm-6">
+                <h1 class="display-4">20+</h1>
+                <p class="mb-0">Partenariats Locaux</p>
+            </div>
+            <div class="col-lg-2 col-sm-6">
+                <h1 class="display-4">10</h1>
+                <p class="mb-0">Années d'Engagement</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="intro">
+                    <h6>Nos Services</h6>
+                    <h1>Que Faisons-Nous ?</h1>
+                    <p class="mx-auto">Nous proposons une gamme de services politiques visant à renforcer l'engagement citoyen et à promouvoir le bien-être collectif.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="service">
+                    <img src="{% static 'img/icon1.png' %}" alt="Ateliers de Sensibilisation">
+                    <h5>Ateliers de Sensibilisation</h5>
+                    <p>Des sessions pour informer les citoyens sur les enjeux politiques et les inciter à s'engager.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service">
+                    <img src="{% static 'img/icon2.png' %}" alt="Campagnes de Mobilisation">
+                    <h5>Campagnes de Mobilisation</h5>
+                    <p>Des initiatives pour mobiliser les citoyens autour de causes importantes et de projets de loi.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service">
+                    <img src="{% static 'img/icon3.png' %}" alt="Soutien aux Initiatives Locales">
+                    <h5>Soutien aux Initiatives Locales</h5>
+                    <p>Nous travaillons avec des groupes locaux pour développer des projets qui bénéficient à la communauté.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service">
+                    <img src="{% static 'img/icon4.png' %}" alt="Consultation Publique">
+                    <h5>Consultation Publique</h5>
+                    <p>Nous organisons des forums pour recueillir les avis et suggestions des citoyens sur des projets politiques.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service">
+                    <img src="{% static 'img/icon5.png' %}" alt="Ressources d'Information">
+                    <h5>Ressources d'Information</h5>
+                    <p>Des guides et des documents pour aider les citoyens à mieux comprendre leurs droits et les processus politiques.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service">
+                    <img src="{% static 'img/icon6.png' %}" alt="Plateforme d'Échange">
+                    <h5>Plateforme d'Échange</h5>
+                    <p>Un espace pour faciliter le dialogue entre les citoyens et leurs représentants politiques.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-light" id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="intro">
+                    <h6>Nos Réalisations</h6>
+                    <h1>Projets Réussis</h1>
+                    <p class="mx-auto">Nous sommes fiers de nos initiatives qui renforcent l'engagement civique et améliorent la qualité de vie dans nos communautés.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="projects-slider" class="owl-theme owl-carousel">
+        <div class="project">
+            <div class="overlay"></div>
+            <img src="{% static 'img/p1.jpg' %}" alt="Jardin Communautaire">
+            <div class="content">
+                <h2>Jardin Communautaire</h2>
+                <h6>Engagement pour l'Environnement</h6>
+            </div>
+        </div>         
+        <div class="project">
+            <div class="overlay"></div>
+            <img src="{% static 'img/lumumba3.jpg' %}" alt="Programme de Lecture Publique">
+            <div class="content">
+                <h2>Programme de Lecture Publique</h2>
+                <h6>Encouragement à la Lecture</h6>
+            </div>
+        </div>
+        <div class="project">
+            <div class="overlay"></div>
+            <img src="{% static 'img/lumumba2.jpg' %}" alt="Concours de Débats">
+            <div class="content">
+                <h2>Concours de Débats</h2>
+                <h6>Promotion de l'Engagement Civique</h6>
+            </div>
+        </div>
+        <div class="project">
+            <div class="overlay"></div>
+            <img src="{% static 'img/lumumba.jpg' %}" alt="Atelier de Créativité Politique">
+            <div class="content">
+                <h2>Atelier de Créativité Politique</h2>
+                <h6>Créativité et Innovation</h6>
+            </div>
+        </div>
+        <div class="project">
+            <div class="overlay"></div>
+            <img src="{% static 'img/kolwezi.jpg' %}" alt="Projets Communautaires">
+            <div class="content">
+                <h2>Projets de Développement Local</h2>
+                <h6>Engagement Social</h6>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="blog-container"> 
+    <h1 class="blog-title">Informations officielles du parti</h1>
+     
+    <div class="blog-list">
+        {% if blog_posts %}
+            {% for post in blog_posts %}
+                <div class="blog-card">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-image">
+                    {% else %}
+                        <img src="https://via.placeholder.com/300" alt="Image par défaut" class="blog-image">
+                    {% endif %}
+                    <h2 class="blog-card-title">{{ post.title }}</h2>
+                    <p class="blog-card-description">{{ post.content|truncatewords:20 }}</p>
+                    <a href="{% url 'blog_detail' post.id %}" class="related-blog-read-more">Voir détail</a>
+                    <span class="blog-date">{{ post.created_at|date:"d M Y" }}</span>
+                </div>
+            {% empty %}
+                <p>Aucun blog disponible à ce moment.</p>
+            {% endfor %}
+        {% else %}
+            <p>Aucun blog disponible à ce moment.</p>
+        {% endif %}
+    </div>
+</div>
+
+<h1 class="gallery-title">Galerie Photo du Parti</h1>
+<div class="gallery">
+    <img src="{% static 'img/tshimanga.jpg' %}" alt="Image 1" class="gallery-item">
+    <img src="{% static 'img/vk.jpg' %}" alt="Image 2" class="gallery-item">
+    <img src="{% static 'img/udps2.png' %}" alt="Image 3" class="gallery-item">
+    <img src="{% static 'img/auguy.jpg' %}" alt="Image 3" class="gallery-item">
+    <img src="{% static 'img/leader.jpg' %}" alt="Image 3" class="gallery-item">
+</div>
+
+<div class="lightbox" id="lightbox">
+    <img class="lightbox-img" id="lightbox-img" src="">
+    <div class="controls">
+        <button class="prev" onclick="changeImage(-1)">&#10094;</button>
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <button class="next" onclick="changeImage(1)">&#10095;</button>
+    </div>
+</div>
+
+<div class="contact-info">
+    <div class="contact-info-wrapper">
+        <div class="info-item">
+            <h3>Adresse</h3>
+            <p>123 Rue Exemple, Ville, Pays</p>
+        </div>
+        <div class="info-item">
+            <h3>Téléphone</h3>
+            <p>+123 456 7890</p>
+        </div>
+        <div class="info-item">
+            <h3>Email</h3>
+            <p>contact@example.com</p>
+        </div>
+        <div class="info-item">
+            <h3>Réseaux Sociaux</h3>
+            <div class="social-media">
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Twitter</a>
+                <a href="#" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

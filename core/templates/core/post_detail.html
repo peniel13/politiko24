@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .blog-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .blog-form {
+        margin-bottom: 40px;
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .blog-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .blog-card {
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .blog-card-title {
+        font-size: 1.5rem;
+        margin: 15px;
+    }
+
+    .blog-card-description {
+        padding: 0 15px;
+        color: #666;
+    }
+
+    .blog-read-more {
+        display: block;
+        padding: 10px 15px;
+        margin: 15px;
+        background: #007bff;
+        color: white;
+        text-align: center;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+    .blog-read-more:hover {
+        background: #0056b3;
+    }
+
+    .alert {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+
+<div class="blog-container">
+    <h1 class="blog-title">Mes Posts</h1>
+
+    {% if form %}
+        <div class="blog-form">
+            <h3>Ajouter un nouveau post</h3>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Titre</label>
+                    <input type="text" name="title" id="title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" class="form-control" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+        </div>
+    {% endif %}
+
+    <h3>Liste des Posts</h3>
+    <div class="blog-list">
+        {% for post in posts %}
+            <div class="blog-card">
+                {% if post.image %}
+                    <img src="{{ post.image.url }}" class="blog-image" alt="{{ post.title }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300" class="blog-image" alt="Image par défaut">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="blog-card-title">{{ post.title }}</h5>
+                    <p class="blog-card-description">{{ post.description|truncatewords:20 }}</p>
+                    <a href="{% url 'post_detail_view' post.id %}" class="blog-read-more">Lire la suite</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="alert alert-warning">Aucun post trouvé.</div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

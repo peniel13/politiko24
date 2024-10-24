@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="blog-container">
+    <h1 class="blog-title">Blogs de la Cellule {{ cellule.nom }}</h1>
+    <div class="blog-list">
+        {% for blog in blogs %}
+            <div class="blog-card mb-4">
+                {% if blog.image %}
+                    <img src="{{ blog.image.url }}" class="blog-card-img-top" alt="{{ blog.title }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/300" class="blog-card-img-top" alt="Image par défaut">
+                {% endif %}
+                <div class="blog-card-body">
+                    <h5 class="blog-card-title">{{ blog.title }}</h5>
+                    <p class="blog-card-text">{{ blog.content|truncatechars:100 }}</p>  <!-- Affiche les 100 premiers caractères -->
+                    <a href="{% url 'cellule_blog_detail' blog.id %}" class="btn btn-primary">Lire la suite</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="alert alert-warning">Aucun blog trouvé pour cette cellule.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .region-container {
+        padding: 20px;
+    }
+
+    .region-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .region-search-form {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .region-search-input {
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .region-search-button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .region-search-button:hover {
+        background-color: #0056b3;
+    }
+
+    .region-list {
+        list-style-type: none; /* Supprimer les puces */
+        padding: 0; /* Supprimer le padding */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Espace entre les éléments */
+    }
+
+    .region-item {
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        width: calc(20% - 10px);
+        min-width: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .region-item:hover {
+        background: #e9ecef;
+    }
+
+    /* Styles responsives */
+    @media (max-width: 768px) {
+        .region-item {
+            width: calc(50% - 10px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .region-item {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="region-container">
+    <h1 class="region-title">Liste des Régions</h1>
+    <form method="GET" class="region-search-form">
+        <input type="text" name="search" placeholder="Rechercher une région" class="region-search-input" />
+        <button type="submit" class="region-search-button">Recherche</button>
+    </form>
+    <ul class="region-list">
+        {% for region in regions %}
+            <li class="region-item">
+                {{ region.nom }}
+                <div>
+                    <a href="{% url 'blogregion' region.id %}">Blog</a> |
+                    <a href="{% url 'forumregion' region.id %}">Forum</a> |
+                    <a href="{% url 'partisan_region' region.id %}">Liste des utilisateurs</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>Aucune région trouvée</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

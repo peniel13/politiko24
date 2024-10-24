@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .post-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .post-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .post-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .post-description {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+    }
+
+    .comment {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .comment-header img {
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .comment-content {
+        margin-top: 10px;
+    }
+
+    .add-comment {
+        margin-top: 30px;
+        padding: 20px;
+        background: #f1f1f1;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="post-container">
+    <h1 class="post-title">{{ post.title }}</h1>
+    <div class="mb-3">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="post-image" alt="{{ post.title }}">
+        {% else %}
+            <img src="https://via.placeholder.com/600" class="post-image" alt="Image par défaut">
+        {% endif %}
+    </div>
+    <p class="post-description">{{ post.description }}</p>
+    <p class="text-muted">Posté le {{ post.timestamp }}</p>
+
+    <h3>Commentaires</h3>
+    {% if post.comments.count > 0 %}
+        {% for comment in post.comments.all %}
+            <div class="comment">
+                <div class="comment-header">
+                    {% if comment.user.profile_pic %}
+                        <img src="{{ comment.user.profile_pic.url }}" alt="{{ comment.user.username }}" width="40" height="40">
+                    {% else %}
+                        <img src="https://via.placeholder.com/40" alt="Image par défaut">
+                    {% endif %}
+                    <div>
+                        <a href="{% if comment.user.id == request.user.id %}{% url 'profile' %}{% else %}{% url 'user_profile' comment.user.id %}{% endif %}">
+                            {{ comment.user.username }}
+                        </a> - {{ comment.user.region }} - {{ comment.user.cellule }}
+                    </div>
+                </div>
+                <p class="comment-content">{{ comment.content }}</p>
+                <p class="text-muted">{{ comment.created_at }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Aucun commentaire pour ce post.</p>
+    {% endif %}
+
+    <div class="add-comment">
+        <h4>Ajouter un Commentaire</h4>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Affiche les champs du formulaire -->
+            <button type="submit" class="btn btn-primary">Commenter</button>
+        </form>
+    </div>
+
+    <a href="{% url 'post_detail' post.user.id %}" class="btn btn-secondary mt-3">Retourner à mes posts</a>
+</div>
+{% endblock content %}

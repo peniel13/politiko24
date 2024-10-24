@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Créer un Vote</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="nom">Nom du Vote :</label>
+    <input type="text" name="nom" required>
+
+    <label for="description">Description :</label>
+    <textarea name="description" required></textarea>
+
+    <label for="date_debut_votes">Date de début :</label>
+    <input type="datetime-local" name="date_debut_votes" required>
+
+    <label for="date_fin_votes">Date de fin :</label>
+    <input type="datetime-local" name="date_fin_votes" required>
+
+    <button type="submit">Créer Vote</button>
+</form>
+{% endblock %}

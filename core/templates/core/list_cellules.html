@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .cellule-container {
+        padding: 20px;
+    }
+
+    .cellule-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .cellule-search-form {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .cellule-search-input {
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .cellule-search-button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .cellule-search-button:hover {
+        background-color: #0056b3;
+    }
+
+    .cellule-list {
+        list-style-type: none; /* Supprimer les puces */
+        padding: 0; /* Supprimer le padding */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Espace entre les éléments */
+    }
+
+    .cellule-item {
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        width: calc(20% - 10px);
+        min-width: 150px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .cellule-item:hover {
+        background: #e9ecef;
+    }
+
+    /* Styles responsives */
+    @media (max-width: 768px) {
+        .cellule-item {
+            width: calc(50% - 10px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .cellule-item {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="cellule-container">
+    <h1 class="cellule-title">Liste des Cellules</h1>
+    <form method="GET" class="cellule-search-form">
+        <input type="text" name="search" placeholder="Rechercher une cellule" class="cellule-search-input" />
+        <button type="submit" class="cellule-search-button">Recherche</button>
+    </form>
+    <ul class="cellule-list">
+        {% for cellule in cellules %}
+            <li class="cellule-item">
+                {{ cellule.nom }}
+                <div>
+                    <a href="{% url 'cellule_blog_list' cellule.id %}">Blogs</a> |
+                    <a href="{% url 'forum_cellule' cellule.id %}">Forum</a> |
+                    <a href="{% url 'partisan_cellule' cellule.id %}">Liste des utilisateurs</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>Aucune cellule trouvée</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }}{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <article class="blog-post">
+        {% comment %} <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+        <h1>{{ blog.title }}</h1>
+        <small>{{ blog.created_at|date:"d M, Y" }}</small>
+        <p>{{ blog.description }}</p> {% endcomment %}
+       
+    </article>
+</div>
+<!-- INFORMATION -->
+<section id="information">
+    <div class="welcome-message">
+        <h1>Adhérez à Notre Parti Politique</h1>
+        <p>Pour devenir membre de notre parti et obtenir votre carte de membre, veuillez suivre les instructions ci-dessous pour effectuer le paiement.</p>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-5 py-5">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="info-box">
+                            <img src="{% static 'img/icon6.png' %}" alt="">
+                            <div class="ms-4">
+                                <h5>Notre Mission</h5>
+                                <p>Nous sommes un parti politique dédié à la défense des droits des citoyens et à la promotion d'une société juste et équitable. Notre mission est de rassembler les voix des citoyens pour créer un avenir meilleur.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="info-box">
+                            <img src="{% static 'img/icon4.png' %}" alt="">
+                            <div class="ms-4">
+                                <h5>Nos Valeurs</h5>
+                                <p>Nous croyons en la démocratie, la transparence et l'inclusion. Nos valeurs fondamentales sont l'intégrité, le respect des droits humains et la solidarité.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <div class="info-box">
+                            <img src="{% static 'img/icon5.png' %}" alt="">
+                            <div class="ms-4">
+                                <h5>Nos Engagements</h5>
+                                <p>Nous nous engageons à travailler pour un développement durable, à promouvoir l'égalité des chances et à garantir que chaque voix compte dans notre société.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <img src="{% static 'img/constant.jpg' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

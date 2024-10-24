@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ thread.title }}</h2>
+    <p class="text-muted">Created by {{ thread.author }} on {{ thread.created_at }}</p>
+    
+    {% if thread.image %}
+        <img src="{{ thread.image.url }}" alt="{{ thread.title }}" class="img-fluid mb-3">
+    {% endif %}
+    
+    <h5>Description:</h5>
+    <p>{{ thread.description }}</p>  <!-- Affiche la description complète -->
+
+    <h4>Comments</h4>
+{% if comments %}
+    <ul class="list-unstyled">
+        {% for comment in comments %}
+            <li class="mb-3">
+                <strong>{{ comment.author }}:</strong>
+                <p>{{ comment.content }}</p>
+                <small class="text-muted">{{ comment.created_at }}</small>
+
+                <!-- Formulaire pour répondre au commentaire -->
+                <form method="post" class="mt-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="parent_comment_id" value="{{ comment.id }}">
+                    {{ form.as_p }}  <!-- Utilisation du CommentForumForm -->
+                    <button type="submit" class="btn btn-secondary">Reply</button>
+                </form>
+
+                <!-- Affichage des réponses -->
+                <ul class="list-unstyled ml-4">
+                    {% for reply in comment.replies.all %}
+                        <li>
+                            <strong>{{ reply.author }}:</strong>
+                            <p>{{ reply.content }}</p>
+                            <small class="text-muted">{{ reply.created_at }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments yet.</p>
+{% endif %}
+
+
+    <h5>Add a Comment</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Utilisation du CommentForumForm -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <a href="{% url 'forum' %}" class="btn btn-secondary mt-3">Back to Forum</a>
+</div>
+{% endblock %}

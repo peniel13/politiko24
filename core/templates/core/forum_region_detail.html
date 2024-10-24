@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ thread.title }}</h2>
+    <p class="text-muted">Créé par {{ thread.author }} le {{ thread.created_at }}</p>
+    
+    {% if thread.image %}
+        <img src="{{ thread.image.url }}" alt="{{ thread.title }}" class="img-fluid mb-3">
+    {% endif %}
+    
+    <h5>Description :</h5>
+    <p>{{ thread.description }}</p>  <!-- Affiche la description complète -->
+
+    <h4>Commentaires</h4>
+    {% if comments %}
+        <ul class="list-unstyled">
+            {% for comment in comments %}
+                <li class="mb-3">
+                    <strong>{{ comment.author }} :</strong>
+                    <p>{{ comment.content }}</p>
+                    <small class="text-muted">{{ comment.created_at }}</small>
+
+                    <!-- Formulaire pour répondre au commentaire -->
+                    <form method="post" class="mt-2">
+                        {% csrf_token %}
+                        <input type="hidden" name="parent_comment_id" value="{{ comment.id }}">
+                        {{ form.as_p }}  <!-- Utilisation du CommentForumRegionForm -->
+                        <button type="submit" class="btn btn-secondary">Répondre</button>
+                    </form>
+
+                    <!-- Affichage des réponses -->
+                    <ul class="list-unstyled ml-4">
+                        {% for reply in comment.replies.all %}
+                            <li>
+                                <strong>{{ reply.author }} :</strong>
+                                <p>{{ reply.content }}</p>
+                                <small class="text-muted">{{ reply.created_at }}</small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun commentaire pour le moment.</p>
+    {% endif %}
+
+    <h5>Ajouter un commentaire</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Utilisation du CommentForumRegionForm -->
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+    </form>
+
+</div>
+{% endblock %}

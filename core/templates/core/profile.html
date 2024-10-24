@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .user-profile-container {
+        padding: 20px;
+    }
+
+    .profile-section {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .profile-pic {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 15px;
+    }
+
+    .user-info h4 {
+        margin: 10px 0;
+    }
+
+    .user-field {
+        margin-bottom: 15px;
+    }
+
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin: 10px 0; /* Ajoute un espacement vertical entre les cartes */
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .row {
+        margin: 10px 0;
+    }
+
+    .info-label {
+        font-weight: bold;
+    }
+
+    .card-columns {
+        column-count: 2; /* Pour avoir deux colonnes */
+    }
+
+    @media (max-width: 768px) {
+        .card-columns {
+            column-count: 1; /* Pour passer à une colonne sur les petits écrans */
+        }
+    }
+</style>
+
+<div class="user-profile-container">
+    <h2 class="text-center">Bienvenue dans votre profil</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Profil Utilisateur</h3>
+            <div class="profile-section">
+                {% if user.profile_pic %}
+                    <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="img-fluid rounded-circle profile-pic">
+                {% else %}
+                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="img-fluid rounded-circle profile-pic">
+                {% endif %}
+                <div class="user-info">
+                    <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+                    <p class="info-label">Email:</p> <p>{{ user.email }}</p>
+                    <p class="info-label">Rôle:</p> <p>{{ user.get_role_display }}</p>
+                    <p class="info-label">Adresse:</p> <p>{{ user.address }}</p>
+                    <p class="info-label">Téléphone:</p> <p>{{ user.phone }}</p>
+                    <p class="info-label">Bio:</p> <p>{{ user.bio }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h3>Modifier le Profil</h3>
+            {% if user == request.user %}
+                <form method="post" enctype="multipart/form-data" class="form-group">
+                    {% csrf_token %}
+                    <input type="text" name="first_name" class="user-field form-control" placeholder="Prénom" value="{{ user.first_name }}" required>
+                    <input type="text" name="last_name" class="user-field form-control" placeholder="Nom" value="{{ user.last_name }}" required>
+                    <input type="email" name="email" class="user-field form-control" placeholder="Votre Email" value="{{ user.email }}" required>
+                    <input type="file" name="profile_pic" class="user-field form-control-file">
+                    <input type="text" name="address" class="user-field form-control" placeholder="Adresse" value="{{ user.address }}">
+                    <input type="text" name="phone" class="user-field form-control" placeholder="Téléphone" value="{{ user.phone }}">
+                    <textarea name="bio" placeholder="Bio" class="user-field form-control">{{ user.bio }}</textarea>
+                    <button type="submit" class="btn btn-primary">Mettre à jour le Profil</button>
+                </form>
+            {% else %}
+                <p>Vous ne pouvez pas modifier ce profil.</p>
+            {% endif %}
+        </div>
+        
+
+        <div class="row">
+            <h3 class="text-center">Mes Contributions et Posts</h3>
+            <div class="cellule-container">
+                <div class="cellule-list" style="display: flex; justify-content: space-between;">
+                    <div class="cellule-item" style="flex: 1; margin-right: 10px;">
+                        <span>Mes Contributions</span>
+                        <div>
+                            <p>Nombre de contributions : {{ contribution_count }}</p>
+                            <a href="{% url 'contribution_detail' user.id %}">Voir les contributions</a>
+                        </div>
+                    </div>
+                    <div class="cellule-item" style="flex: 1;">
+                        <span>Mes Posts</span>
+                        <div>
+                            <p>Nombre de posts : {{ post_count }}</p>
+                            <a href="{% url 'post_detail' user.id %}">Voir les posts</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+{% endblock %}

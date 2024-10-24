@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="blog-container mt-4">
+    <h1 class="blog-title">Discussions du Forum pour la Cellule {{ cellule.nom }}</h1>
+    <div class="blog-list">
+        {% if forum_threads %}
+            {% for thread in forum_threads %}
+                <div class="blog-card mb-4">
+                    <div class="blog-card-body">
+                        {% if thread.image %}
+                            <img src="{{ thread.image.url }}" class="blog-card-img-top" alt="{{ thread.title }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300" class="blog-card-img-top" alt="Image par défaut">
+                        {% endif %}
+                        <h5 class="blog-card-title">{{ thread.title }}</h5>
+                        <p class="text-muted">Créé par {{ thread.author }} le {{ thread.created_at }}</p>
+                        <a href="{% url 'cellule_forum_thread_detail' thread.id %}" class="btn btn-primary">Va discuter</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Aucune discussion disponible pour cette cellule pour le moment.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

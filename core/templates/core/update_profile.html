@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    form {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background-color: white;
+        width: 600px;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px auto;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center">Update Your Profile</h2>
+
+    <form method="post" id="updateProfileForm" action="" enctype="multipart/form-data">  <!-- Ajout de enctype ici -->
+        {% csrf_token %}
+        <div class="row">
+            {% for field in form %}
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        {{ field.label_tag }} {{ field }}
+                        {% if field.errors %}
+                            <small class="text-danger">{{ field.errors }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Update Profile</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const regionSelect = $("#id_region");
+        const celluleSelect = $("#id_cellule");
+
+        regionSelect.change(function () {
+            const regionId = $(this).val();
+            const url = "{% url 'load_cellules' %}"; // Assurez-vous que cette URL est correcte
+
+            $.ajax({
+                url: url,
+                data: {
+                    'region_id': regionId
+                },
+                success: function (data) {
+                    celluleSelect.html(data); // Met à jour le dropdown des cellules
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock content %}

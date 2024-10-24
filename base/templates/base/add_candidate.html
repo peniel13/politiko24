@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Ajouter un candidat</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajouter le candidat</button>
+</form>
+
+<a href="{% url 'candidate_list' %}">Retourner à la liste des candidats</a>
+{% endblock %}

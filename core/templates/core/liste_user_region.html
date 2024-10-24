@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .user-container {
+        padding: 20px;
+    }
+
+    .user-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .user-search-form {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .user-search-input {
+        padding: 10px;
+        width: 250px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .user-search-button {
+        padding: 10px 15px;
+        margin-left: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .user-search-button:hover {
+        background-color: #0056b3;
+    }
+
+    .user-list {
+        list-style-type: none; /* Supprimer les puces */
+        padding: 0; /* Supprimer le padding */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Espace entre les éléments */
+    }
+
+    .user-item {
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        width: calc(20% - 10px);
+        min-width: 150px;
+        display: flex;
+        align-items: center;
+    }
+
+    .user-avatar {
+        margin-right: 10px;
+    }
+
+    .user-item:hover {
+        background: #e9ecef;
+    }
+
+    .user-name {
+        font-weight: bold;
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .user-name:hover {
+        text-decoration: underline;
+    }
+
+    /* Styles responsives */
+    @media (max-width: 768px) {
+        .user-item {
+            width: calc(50% - 10px);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .user-item {
+            width: 100%;
+        }
+    }
+</style>
+
+<div class="user-container">
+    <h1 class="user-title">Liste des utilisateurs de la région {{ region.nom }}</h1>
+
+    <form method="get" action="{% url 'partisan_region' region.id %}" class="user-search-form">
+        <input type="text" name="q" placeholder="Rechercher par nom" value="{{ query }}" class="user-search-input">
+        <button type="submit" class="user-search-button">Rechercher</button>
+    </form>
+
+    <ul class="user-list">
+        {% for user in users %}
+            <li class="user-item">
+                <div class="user-avatar">
+                    {% if user.profile_pic and user.profile_pic.name %}
+                        <img src="{{ user.profile_pic.url }}" alt="{{ user.username }}'s profile picture" class="rounded-circle" width="50">
+                    {% else %}
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Default avatar" class="rounded-circle" width="50">
+                    {% endif %}
+                </div>
+                <div>
+                    <a href="{% if user.id == request.user.id %}{% url 'profile' %}{% else %}{% url 'user_profile' user.id %}{% endif %}" class="user-name">{{ user.username }}</a>
+                    <p>{{ user.region }} - {{ user.cellule }}</p>
+                </div>
+            </li>
+        {% empty %}
+            <li>Aucun utilisateur trouvé.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

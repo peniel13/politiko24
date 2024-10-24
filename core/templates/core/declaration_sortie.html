@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>Déclaration de Sortie</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Soumettre</button>
+</form>
+
+<h2>Mes Déclarations de Sortie</h2>
+<ul>
+    {% for declaration in declarations_sortie %}
+        <li>{{ declaration.titre }} - {{ declaration.montant_sortie }}</li>
+    {% empty %}
+        <li>Aucune déclaration de sortie.</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

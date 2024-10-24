@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Liste des Votes</h1>
+    <div>
+        {% for vote in votes %}
+        <div class="card">
+            <h2>{{ vote.nom }}</h2>
+            <p>{{ vote.description|truncatewords:20 }}</p>
+            <p><strong>Candidats :</strong> {{ vote.candidats.count }}</p>
+            <p>
+                {% if vote.votes_sont_ouverts %}
+                    <span style="color: green;">En cours</span>
+                {% else %}
+                    <span style="color: red;">Fermé</span>
+                {% endif %}
+            </p>
+            <a href="{% url 'detail_vote' vote.id %}">Détails du vote</a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
